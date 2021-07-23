@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>HOW WAS YOUR DAY?</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/join.css">
+    <!--===============================================================================================-->
+</head>
+
+<!-- <script>
+function passwordComparison(){
+    var p1 = document.getElementById('password1').value;
+    var p2 = document.getElementById('password2').value;
+    console.log(p1);
+    console.log(p2);
+    if( p1 != p2 ) {
+      alert("Passwords do not match.");
+      
+      return false;
+    }
+}
+</script> -->
+
+<body style="background-color: #666666;">
+
+    <div class="limiter">
+        <div class="container-login100">
+            <form class="login100-form validate-form">
+                <span class="login100-form-title p-b-43">
+                    <h1><b>FINDING YOUR PASSWORD</b></h1>
+                </span>
+
+
+                <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                    <input class="input100" type="text" name="email" id="email">
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Email</span>
+                </div>
+
+                <p style="text-align: center; color:rgb(160, 0, 0)" id="emailMatch"></p>
+
+                <hr>
+
+                <p style="text-align: center;">Please enter the email address <b></b>you entered during registration.</p>
+                <p style="text-align: center;">If the password reset mail has been sent successfully, <br> <b>return to the login screen.</b></p>
+                <hr>
+
+                <div class="flex-sb-m w-full p-t-3 p-b-32">
+                    <!-- <div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">
+                        </label>
+                    </div> -->
+
+
+                    <div>
+
+                        <a href="index.html" class="txt1" style="text-align: center;">
+                            Go to Home
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="button" id="send">
+                        SEND E-MAIL
+                    </button>
+                </div>
+
+                <!--<div class="text-center p-t-46 p-b-20">
+                  <span class="txt2">
+
+                  </span>
+               </div>
+
+               <div class="login100-form-social flex-c-m">
+                  <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
+                     <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                  </a>
+
+                  <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+                     <i class="fa fa-twitter" aria-hidden="true"></i>
+                  </a>
+               </div>-->
+            </form>
+
+        </div>
+    </div>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script> -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBSWEAzpYzAPxdl4-wUJZm1H-S53y1R0vM",
+            authDomain: "webosdb1.firebaseapp.com",
+            projectId: "webosdb1",
+            storageBucket: "webosdb1.appspot.com",
+            messagingSenderId: "860891529708",
+            appId: "1:860891529708:web:e1c69098deb072381140c9"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+    </script>
+
+    <script>
+
+        // const db = firebase.firestore();
+        // const storage = firebase.storage();
+
+        $('#send').click(function () {
+
+            var email = $('#email').val();
+
+
+            firebase.auth().sendPasswordResetEmail(email)
+                .then(() => {
+                    $('#emailMatch').html("Password reset email sent.");
+                    $('#emailMatch').css({ color: "#065471" });
+                    alert("Password reset email sent.");
+                })
+                .catch((error) => {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    //alert(error);
+                    //alert("Please check your name and email again.");
+
+                    if (errorCode == 'auth/invalid-email') {
+                        $('#emailMatch').html("Please enter your email address in abc@d.f format.");
+                    }
+                    else if (errorCode == 'auth/user-not-found') {
+                        $('#emailMatch').html("There is no user record corresponding to this identifier.");
+                    }
+
+                })(jQuery);
+
+        })
+
+
+    </script>
+
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/find.js"></script>
+
+</body>
+
+</html>
