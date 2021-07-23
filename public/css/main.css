@@ -186,7 +186,7 @@ iframe {
 /*==================================================================
 [ Background ]*/
 .bg1 {background: #a3be7e;}
-.bg2 {background: #a3be7e;}
+.bg2 {background: #1da1f2;}
 .bg3 {background: #cd201f;}
 
 
@@ -295,9 +295,9 @@ iframe {
 
 .label-input100 {
   font-family: Montserrat-Regular;
-  font-size: 15px;
+  font-size: 18px;
   color: #999999;
-  line-height: 1.0;
+  line-height: 1.2;
 
   display: block;
   position: absolute;
@@ -305,7 +305,7 @@ iframe {
   width: 100%;
   padding-left: 24px;
   left: 0;
-  top: 33px;
+  top: 30px;
 
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
