@@ -156,6 +156,7 @@ function passwordComparison(){
                     $('#emailMatch').html("Password reset email sent.");
                     $('#emailMatch').css({ color: "#065471" });
                     alert("Password reset email sent.");
+                    window.location.href = "index.html";
                 })
                 .catch((error) => {
                     var errorCode = error.code;
