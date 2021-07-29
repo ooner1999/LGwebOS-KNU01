@@ -41,25 +41,26 @@
 
                 <button class="navigationBar_Button" type="button" onClick="location.href='mainPage.html'">
                     / HOME /
-               </button>
+                </button>
 
                 <button class="navigationBar_Button" type="button" onClick="location.href='index.html'">
-                   / LOGOUT /
+                    / LOGOUT /
                 </button>
 
             </div>
             <form class="login100-form validate-form">
-                <p style="text-align: center; font-size:40px; font-weight: 500; color:#979797" id = "clock"></p>
+                <p style="text-align: center; font-size:40px; font-weight: 500; color:#979797" id="clock"></p>
 
                 <p style="text-align: center; font-size:80px; font-weight: 900; color:#000"> " HOW WAS YOUR DAY? "</p>
 
-                
+
 
                 <!-- <p style="text-align: center; color:rgb(160, 0, 0)" id="emailMatch"></p> -->
 
                 <p style="text-align: center; font-size:30px; font-style:italic; font-weight: bolder;">Tell me how your
                     day was.</p>
-                <p style="text-align: center; color:#979797">I'll give you some advice <b>only for you</b>, healing your mind.</p>
+                <p style="text-align: center; color:#979797">I'll give you some advice <b>only for you</b>, healing your
+                    mind.</p>
                 <br>
                 <hr>
                 <div class="flex-sb-m w-full p-t-3 p-b-32">
@@ -71,46 +72,49 @@
 
                     <!-- 
                     <div>
-
                         <a href="index.html" class="txt1" style="text-align: center;">
                             Go to Home
                         </a>
-
                     </div> -->
                 </div>
 
 
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn" type="button" id="send">
+                    <button class="login100-form-btn" type="button" id="emotion" onclick="location.href='emotionPage.html'">
                         EMOTION
                     </button>
-                    <button class="login100-form-btn2" type="button" id="send">
+                    <button class="login100-form-btn2" type="button" id="stability" onclick="location.href='stabilityPage.html'">
                         STABILITY
                     </button>
-                    <button class="login100-form-btn" type="button" id="send">
+                    <button class="login100-form-btn" type="button" id="environment" onclick="location.href='environmentPage.html'">
                         ENVIRONMENT
                     </button>
                     <br>
-                    <button class="login100-form-btn2" type="button" id="send" onClick="location.href='resultPage.html'">
+                    <button class="login100-form-btn2" type="button" id="week"
+                        onClick="location.href='resultPage.html'">
                         WEEK
                     </button>
-                </div>
-
-                <div class="container-login100-form-btn">
 
                 </div>
+
+                <!-- <div id="buttonEvent" class="container-login100">
+                    <video autoplay="true" id="videoElement"></video><br>
+                    <p style="text-align: center; font-size:30px; font-weight: 500; color:#a3be7e" id="event1"></p>
+                    <p style="text-align: center; font-size:30px; font-weight: 500; color:#a3be7e" id="event2"></p>
+                    <p style="text-align: center; color:#979797" id="event3"></p>
+                    <br>
+
+                </div>  -->
+
 
                 <!--<div class="text-center p-t-46 p-b-20">
                   <span class="txt2">
-
                   </span>
                </div>
-
                <div class="login100-form-social flex-c-m">
                   <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
                      <i class="fa fa-facebook-f" aria-hidden="true"></i>
                   </a>
-
                   <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
                      <i class="fa fa-twitter" aria-hidden="true"></i>
                   </a>
@@ -122,23 +126,24 @@
 
 
 
-    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script> -->
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-database.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
     <script>
         // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         var firebaseConfig = {
             apiKey: "AIzaSyBSWEAzpYzAPxdl4-wUJZm1H-S53y1R0vM",
             authDomain: "webosdb1.firebaseapp.com",
+            databaseURL: "https://webosdb1-default-rtdb.firebaseio.com",
             projectId: "webosdb1",
             storageBucket: "webosdb1.appspot.com",
             messagingSenderId: "860891529708",
@@ -146,47 +151,54 @@
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        // Get a reference to the database service
+        var database = firebase.database();
 
     </script>
 
 
+    <!-- <script>
 
-    <script>
+        const process = document.getElementById('buttonEvent');
+        const pro1 = document.getElementById('event1');
+        const pro2 = document.getElementById('event2');
+        const pro3 = document.getElementById('event3');
+        // if(process.innerHTML != null){
+        //     process.innerHTML = "";
+        // }
 
-        // const db = firebase.firestore();
-        // const storage = firebase.storage();
+        function emotionCam() {
+            var video = document.querySelector("#videoElement");
 
-        $('#send').click(function () {
+            if (navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function (stream) {
+                        video.srcObject = stream;
+                    })
+                    .catch(function (err0r) {
+                        console.log("Something went wrong!");
+                    });
+            }
 
-            var email = $('#email').val();
-
-
-            firebase.auth().sendPasswordResetEmail(email)
-                .then(() => {
-                    $('#emailMatch').html("Password reset email sent.");
-                    $('#emailMatch').css({ color: "#065471" });
-                    alert("Password reset email sent.");
-                    window.location.href = "index.html";
-                })
-                .catch((error) => {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    //alert(error);
-                    //alert("Please check your name and email again.");
-
-                    if (errorCode == 'auth/invalid-email') {
-                        $('#emailMatch').html("Please enter your email address in abc@d.f format.");
-                    }
-                    else if (errorCode == 'auth/user-not-found') {
-                        $('#emailMatch').html("There is no user record corresponding to this identifier.");
-                    }
-
-                })(jQuery);
-
-        })
+            pro1.innerHTML = "How are you feeling?"
+        }
 
 
-    </script>
+        function stabilityData() {
+            pro1.innerHTML = "Please put your hand on the sensor."
+            //pro2.innerHTML = "I'm measuring your heart rate.<br>Please wait a moment...";
+        }
+
+
+        function environmentData() {
+            //process.innerHTML = "";
+            pro1.innerHTML = "I'm measuring the current temperature and humidity.<br>Please wait a moment..."
+            pro2.innerHTML = "";
+        }
+
+    </script> -->
 
     <script>
 
@@ -219,8 +231,6 @@
 
         }
 
-
-
         function init() {
 
             clock();
@@ -228,8 +238,6 @@
             setInterval(clock, 1000);
 
         }
-
-
 
         init();
     </script>
