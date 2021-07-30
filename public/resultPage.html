@@ -38,11 +38,8 @@
 
 <body style="background-color: #666666;">
 
-
-
     <div class="limiter">
         <div class="container-login100">
-
 
             <div class=navigationBar>
 
@@ -62,8 +59,6 @@
 
                 <p style="text-align: center; font-size:60px; font-weight: 900; color:#a3be7e"> Your day, your week.</p>
 
-
-
                 <!-- <p style="text-align: center; color:rgb(160, 0, 0)" id="emailMatch"></p> -->
 
                 <p style="text-align: center; font-size:30px; font-style:italic; font-weight: bolder;">Look back at your
@@ -75,7 +70,6 @@
 
                 <div id="curve_chart" style="width: 100%; height: 300px"></div>
 
-
                 <div class="flex-sb-m w-full p-t-3 p-b-32">
                     <!-- <div class="contact100-form-checkbox">
                         <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
@@ -85,32 +79,20 @@
 
                     <!-- 
                     <div>
-
                         <a href="index.html" class="txt1" style="text-align: center;">
                             Go to Home
                         </a>
-
                     </div> -->
                 </div>
 
-
-                <div class="container-login100-form-btn">
-                </div>
-
-
-                
-
                 <!--<div class="text-center p-t-46 p-b-20">
                   <span class="txt2">
-
                   </span>
                </div>
-
                <div class="login100-form-social flex-c-m">
                   <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
                      <i class="fa fa-facebook-f" aria-hidden="true"></i>
                   </a>
-
                   <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
                      <i class="fa fa-twitter" aria-hidden="true"></i>
                   </a>
@@ -119,10 +101,6 @@
 
         </div>
     </div>
-
-
-
-
 
 
     <!--===============================================================================================-->
@@ -184,74 +162,60 @@
 
     function drawChart(chartData) {
 
-var data = google.visualization.arrayToDataTable(chartData);
+        var data = google.visualization.arrayToDataTable(chartData);
 
-var options = {
+        var options = {
 
-    title: 'Data Visualize',
+            title: 'Your Week',
 
-    curveType: 'function',
+            curveType: 'function',
 
-    legend: {
+            legend: {
 
-        position: 'bottom'
+                position: 'bottom'
 
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
     }
 
-};
 
+    database.ref().child('user').on('value', function (snapshot) {
 
-var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        var snapVal = snapshot.val();
+        var count = 0;
+        var chartArray = [];
+        var dayArray = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-chart.draw(data, options);
+        chartArray.push(['Sunday', 'Heart Rate', 'Body Temperature', 'Temperature', 'Humidity']);
 
-}
+        for (var key in snapVal) {
 
-//database.ref('message').orderByChild('orderNum');
-database.ref().child('message').on('value', function (snapshot) {
+            //key는 유저 id
 
+            if (snapVal.hasOwnProperty(key)) {
 
-var snapVal = snapshot.val();
+                console.log("key/value", key, snapVal[key]);
 
-//console.log("snapshot.val()", snapVal);
+                var val1 = snapVal[key].heartRate;
+                var val2 = snapVal[key].bodyTemperature;
+                var val3 = snapVal[key].temperature;
+                var val4 = snapVal[key].humidity;
 
-var count = 0;
+                chartArray.push([dayArray[count++], parseFloat(val1), parseFloat(val2), parseFloat(val3), parseFloat(val4)]);
+                //chartArray2.push([count++, parseFloat(message2)]);
+                // for (var obj in snapVal[key]) {
+                //     var message = snapVal[key][obj].heartRate;
+                //     chartArray.push([count++, parseInt(message)]);
+                // }
+            }
+        }
 
-var chartArray = [];
-
-chartArray.push(['0', 'Heart Rate', 'Body Temperature']);
-//chartArray2.push(['0', 'Body Temperature']);
-
-for (var key in snapVal) {
-
-    //key는 유저 id
-
-    if (snapVal.hasOwnProperty(key)) {
-
-        console.log("key/value", key, snapVal[key]);
-
-        var val1 = snapVal[key].heartRate;
-        var val2 = snapVal[key].temperature;
-
-        chartArray.push([count++, parseFloat(val1), parseFloat(val2)]);
-        //chartArray2.push([count++, parseFloat(message2)]);
-
-        // for (var obj in snapVal[key]) {
-
-        //     var message = snapVal[key][obj].heartRate;
-
-        //     chartArray.push([count++, parseInt(message)]);
-
-        // }
-
-    }
-
-}
-
-drawChart(chartArray);
-//drawChart(chartArray2);
-
-});
+        drawChart(chartArray);
+    });
 </script>
 
 </html>
