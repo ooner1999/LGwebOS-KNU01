@@ -67,58 +67,29 @@
                 <!-- <p style="text-align: center; color:rgb(160, 0, 0)" id="emailMatch"></p> -->
 
                 <p style="text-align: center; font-size:30px; font-style:italic; font-weight: bolder;">Measure your heart rate and body temperature.</p>
-                <p style="text-align: center; color:#979797">I'll give you some advice <b>only for you</b>, healing your mind.</p>
+                <p style="text-align: center; color:#979797">I'll give you some advice <b>only for you</b>, healing your
+                    mind.</p>
                 <br>
                 <hr>
 
                 <div id="dataField" style="width: 100%; height: 300px">
-                    <p style="text-align: center; font-size:30px; font-weight: 500; color:#a3be7e" id="event1">
+                    <p style="text-align: center; font-size:30px; font-weight: 500; color:#a3be7e">
                         I'm measuring the heart rate and body temperature.<br>Please wait a moment...</p>
                     <div class="container-login100-form-btn">
-                        <button class="login100-form-btn" type="button" id="result">
+                        <button class="login100-form-btn" type="button" id="result" onclick="stabilityData()">
                             Show me the result
                         </button>
                     </div>
-                    
-                </div>
+                    <p style="text-align: center; font-size:30px; font-weight: 500; font-style:italic; color:#050505"
+                        id="event1"></p>
+                    <!-- <p style="text-align: center; font-size:30px; font-weight: 500; color:#a3be7e" id="event2"></p>
+                    <p style="text-align: center; color:#979797" id="event3"></p> -->
+                    <br>
 
-
-                <div class="flex-sb-m w-full p-t-3 p-b-32">
-                    <!-- <div class="contact100-form-checkbox">
-                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                        <label class="label-checkbox100" for="ckb1">
-                        </label>
-                    </div> -->
-
-                    <!-- 
-                    <div>
-                        <a href="index.html" class="txt1" style="text-align: center;">
-                            Go to Home
-                        </a>
-                    </div> -->
-                </div>
-                
-
-                <!--<div class="text-center p-t-46 p-b-20">
-                  <span class="txt2">
-                  </span>
-               </div>
-               <div class="login100-form-social flex-c-m">
-                  <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-                     <i class="fa fa-facebook-f" aria-hidden="true"></i>
-                  </a>
-                  <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-                     <i class="fa fa-twitter" aria-hidden="true"></i>
-                  </a>
-               </div>-->
             </form>
 
         </div>
     </div>
-
-
-
-
 
 
     <!--===============================================================================================-->
@@ -155,13 +126,14 @@
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     var firebaseConfig = {
-        apiKey: "AIzaSyBSWEAzpYzAPxdl4-wUJZm1H-S53y1R0vM",
-        authDomain: "webosdb1.firebaseapp.com",
-        databaseURL: "https://webosdb1-default-rtdb.firebaseio.com",
-        projectId: "webosdb1",
-        storageBucket: "webosdb1.appspot.com",
-        messagingSenderId: "860891529708",
-        appId: "1:860891529708:web:e1c69098deb072381140c9"
+        apiKey: "AIzaSyCs3KER-7H9c_VXVBDIMETvyMvcE7nhaOI",
+        authDomain: "graphtest-2c3b1.firebaseapp.com",
+        databaseURL: "https://graphtest-2c3b1-default-rtdb.firebaseio.com",
+        projectId: "graphtest-2c3b1",
+        storageBucket: "graphtest-2c3b1.appspot.com",
+        messagingSenderId: "464120003442",
+        appId: "1:464120003442:web:f54ce2027935681dfffbeb",
+        measurementId: "G-V3PJYPMMX0"
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
@@ -169,6 +141,170 @@
 
     // Get a reference to the database service
     var database = firebase.database();
+
+    var val2
+    var val1
+
+    database.ref().on('value', function (snapshot) {
+        var snapVal = snapshot.val();
+
+        for (var key in snapVal) {
+            //key는 유저 id
+            if (snapVal.hasOwnProperty(key)) {
+                val2 = snapVal[key].heartRate;
+                val1 = snapVal[key].bodyTemperature;
+            }
+        }
+    });
+
+    //val2 = parseFloat(heartRate);
+    //val1 = parseFloat(bodyTemperature);
+
+    const pro1 = document.getElementById('event1');
+    //const pro2 = document.getElementById('event2');
+    //const pro3 = document.getElementById('event3');
+
+    function stabilityData() {
+        if (parseFloat(val1) <= 70) {
+
+        // A very healthy heart rate.
+
+            if (parseFloat(val2) <= 35.5) {
+                
+                pro1.innerHTML = "A very healthy heart rate.<br>But I think you're sick somewhere.";
+                
+                // But I think you're sick somewhere.
+            }
+            else if (parseFloat(val2) > 35.5 && parseFloat(val2) <= 36) {
+                
+                pro1.innerHTML = "A very healthy heart rate.<br>Isn't it a little cold where you are now?";
+                
+                // Isn't it a little cold where you are now?
+            }
+            else if (parseFloat(val2) > 36 && parseFloat(val2) <= 37) {
+                
+                pro1.innerHTML = "A very healthy heart rate.<br>Normal body temperature. Your immunity is at its best.";
+                
+                // Normal body temperature. Your immunity is at its best.
+            }
+            else if (parseFloat(val2) > 37 && parseFloat(val2) <= 37.5) {
+                
+                pro1.innerHTML = "A very healthy heart rate.<br>Is it after exercise? Or is it hot around here?";
+                
+                // Is it after exercise? Or is it hot around here?
+            }
+            else if (parseFloat(val2) > 37.5) {
+                
+                pro1.innerHTML = "A very healthy heart rate.<br>It is necessary to lower the body temperature. If the fever does not go down, see your doctor ";
+            
+                // It is necessary to lower the body temperature. If the fever does not go down, see your doctor 
+            }
+        }
+        else if (parseFloat(val1) > 70 && parseFloat(val1) <= 80) {
+
+        // Normal heart rate.
+
+            if (parseFloat(val2) <= 35.5) {
+                
+                pro1.innerHTML = "Normal heart rate.<br>But I think you're sick somewhere.";
+                
+
+            }
+            else if (parseFloat(val2) > 35.5 && parseFloat(val2) <= 36) {
+                
+                pro1.innerHTML = "Normal heart rate.<br>Isn't it a little cold where you are now?";
+                
+
+            }
+            else if (parseFloat(val2) > 36 && parseFloat(val2) <= 37) {
+                
+                pro1.innerHTML = "Normal heart rate.<br>Normal body temperature. Your immunity is at its best.";
+                
+
+            }
+            else if (parseFloat(val2) > 37 && parseFloat(val2) <= 37.5) {
+                
+                pro1.innerHTML = "Normal heart rate.<br>Is it after exercise? Or is it hot around here?";
+                
+
+            }
+            else if (parseFloat(val2) > 37.5) {
+                
+                pro1.innerHTML = "Normal heart rate.<br>It is necessary to lower the body temperature. If the fever does not go down, see your doctor ";
+                
+
+            }
+        }
+        else if (parseFloat(val1) > 80 && parseFloat(val1) <= 90) {
+
+            // Are you a little excited?  I hope it's good excitement.
+
+            if (parseFloat(val2) <= 35.5) {
+                
+                pro1.innerHTML = "Are you a little excited?  I hope it's good excitement.<br>But I think you're sick somewhere.";
+                
+
+            }
+            else if (parseFloat(val2) > 35.5 && parseFloat(val2) <= 36) {
+                
+                pro1.innerHTML = "Are you a little excited?  I hope it's good excitement.<br>Isn't it a little cold where you are now?";
+                
+
+            }
+            else if (parseFloat(val2) > 36 && parseFloat(val2) <= 37) {
+                
+                pro1.innerHTML = "Are you a little excited?  I hope it's good excitement.<br>Normal body temperature. Your immunity is at its best.";
+                
+
+            }
+            else if (parseFloat(val2) > 37 && parseFloat(val2) <= 37.5) {
+                
+                pro1.innerHTML = "Are you a little excited?  I hope it's good excitement.<br>Is it after exercise? Or is it hot around here?";
+                
+
+            }
+            else if (parseFloat(val2) > 37.5) {
+                
+                pro1.innerHTML = "Are you a little excited?  I hope it's good excitement.<br>It is necessary to lower the body temperature. If the fever does not go down, see your doctor ";
+                
+
+            }
+        }
+        else if (parseFloat(val1) > 90) {
+
+            // You need to calm down! Take a breath slowly.
+
+            if (parseFloat(val2) <= 35.5) {
+            
+                pro1.innerHTML = "You need to calm down! Take a breath slowly.<br>But I think you're sick somewhere.";
+                
+
+            }
+            else if (parseFloat(val2) > 35.5 && parseFloat(val2) <= 36) {
+                
+                pro1.innerHTML = "You need to calm down! Take a breath slowly.<br>Isn't it a little cold where you are now?";
+                
+
+            }
+            else if (parseFloat(val2) > 36 && parseFloat(val2) <= 37) {
+                
+                pro1.innerHTML = "You need to calm down! Take a breath slowly.<br>Normal body temperature. Your immunity is at its best.";
+                
+
+            }
+            else if (parseFloat(val2) > 37 && parseFloat(val2) <= 37.5) {
+                
+                pro1.innerHTML = "You need to calm down! Take a breath slowly.<br>Is it after exercise? Or is it hot around here?";
+                
+
+            }
+            else if (parseFloat(val2) > 37.5) {
+                
+                pro1.innerHTML = "You need to calm down! Take a breath slowly.<br>It is necessary to lower the body temperature. If the fever does not go down, see your doctor ";
+                
+            }
+            }
+    }
 
 
 
