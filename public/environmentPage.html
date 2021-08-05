@@ -66,57 +66,31 @@
 
                 <!-- <p style="text-align: center; color:rgb(160, 0, 0)" id="emailMatch"></p> -->
 
-                <p style="text-align: center; font-size:30px; font-style:italic; font-weight: bolder;">Measure current temperature and humidity.</p>
-                <p style="text-align: center; color:#979797">I'll give you some advice <b>only for you</b>, healing your mind.</p>
+                <p style="text-align: center; font-size:30px; font-style:italic; font-weight: bolder;">Measure current
+                    temperature and humidity.</p>
+                <p style="text-align: center; color:#979797">I'll give you some advice <b>only for you</b>, healing your
+                    mind.</p>
                 <br>
                 <hr>
 
                 <div id="dataField" style="width: 100%; height: 300px">
-                    <p style="text-align: center; font-size:30px; font-weight: 500; color:#a3be7e" id="event1">
+                    <p style="text-align: center; font-size:30px; font-weight: 500; color:#a3be7e">
                         I'm measuring the current temperature and humidity.<br>Please wait a moment...</p>
                     <div class="container-login100-form-btn">
-                        <button class="login100-form-btn" type="button" id="result">
+                        <button class="login100-form-btn" type="button" id="result" onclick="environmentData()">
                             Show me the result
                         </button>
-                </div>
+                    </div>
+                    <p style="text-align: center; font-size:30px; font-weight: 500; font-style:italic; color:#050505"
+                        id="event1"></p>
+                    <!-- <p style="text-align: center; font-size:30px; font-weight: 500; color:#a3be7e" id="event2"></p>
+                    <p style="text-align: center; color:#979797" id="event3"></p> -->
+                    <br>
 
-
-                <div class="flex-sb-m w-full p-t-3 p-b-32">
-                    <!-- <div class="contact100-form-checkbox">
-                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                        <label class="label-checkbox100" for="ckb1">
-                        </label>
-                    </div> -->
-
-                    <!-- 
-                    <div>
-                        <a href="index.html" class="txt1" style="text-align: center;">
-                            Go to Home
-                        </a>
-                    </div> -->
-                </div>
-                
-
-                <!--<div class="text-center p-t-46 p-b-20">
-                  <span class="txt2">
-                  </span>
-               </div>
-               <div class="login100-form-social flex-c-m">
-                  <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-                     <i class="fa fa-facebook-f" aria-hidden="true"></i>
-                  </a>
-                  <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-                     <i class="fa fa-twitter" aria-hidden="true"></i>
-                  </a>
-               </div>-->
             </form>
 
         </div>
     </div>
-
-
-
-
 
 
     <!--===============================================================================================-->
@@ -153,13 +127,14 @@
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     var firebaseConfig = {
-        apiKey: "AIzaSyBSWEAzpYzAPxdl4-wUJZm1H-S53y1R0vM",
-        authDomain: "webosdb1.firebaseapp.com",
-        databaseURL: "https://webosdb1-default-rtdb.firebaseio.com",
-        projectId: "webosdb1",
-        storageBucket: "webosdb1.appspot.com",
-        messagingSenderId: "860891529708",
-        appId: "1:860891529708:web:e1c69098deb072381140c9"
+        apiKey: "AIzaSyCs3KER-7H9c_VXVBDIMETvyMvcE7nhaOI",
+        authDomain: "graphtest-2c3b1.firebaseapp.com",
+        databaseURL: "https://graphtest-2c3b1-default-rtdb.firebaseio.com",
+        projectId: "graphtest-2c3b1",
+        storageBucket: "graphtest-2c3b1.appspot.com",
+        messagingSenderId: "464120003442",
+        appId: "1:464120003442:web:f54ce2027935681dfffbeb",
+        measurementId: "G-V3PJYPMMX0"
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
@@ -167,6 +142,53 @@
 
     // Get a reference to the database service
     var database = firebase.database();
+
+    var temperature
+    var humidity
+    database.ref().on('value', function (snapshot) {
+        var snapVal = snapshot.val();
+
+        for (var key in snapVal) {
+            //key는 유저 id
+            if (snapVal.hasOwnProperty(key)) {
+                temperature = snapVal[key].temperature;
+                humidity = snapVal[key].humidity;
+            }
+        }
+    });
+
+    temperature = parseFloat(temperature);
+    humidity = parseFloat(humidity);
+    console.log(temperature);
+    console.log(humidity);
+
+    const pro1 = document.getElementById('event1');
+    //const pro2 = document.getElementById('event2');
+    //const pro3 = document.getElementById('event3');
+
+    function environmentData() {
+        if (temperature > 14 && temperature < 18 && humidity == 70
+            || temperature >= 18 && temperature < 21 && humidity == 60
+            || temperature >= 21 && temperature < 24 && humidity == 50
+            || temperature >= 24 && humidity == 40) {
+            //적정 - 온도에 맞는 적당한 습도를 유지하고 계시네요. 
+            pro1.innerHTML = "You are maintaining the right humidity for the temperature.<br>"
+        }
+        else if (temperature > 14 && temperature < 18 && humidity < 70
+            || temperature >= 18 && temperature < 21 && humidity < 60
+            || temperature >= 21 && temperature < 24 && humidity < 50
+            || temperature >= 24 && humidity < 40) {
+            //습도 낮음 - 습도가 낮아 건조하진 않으신가요? 건강에 안 좋은 영향을 끼칠 수 있으니 
+            pro1.innerHTML = "2"
+        }
+        else if (temperature > 14 && temperature < 18 && humidity > 70
+            || temperature >= 18 && temperature < 21 && humidity > 60
+            || temperature >= 21 && temperature < 24 && humidity > 50
+            || temperature >= 24 && humidity > 40) {
+            //습도 높음
+            pro1.innerHTML = "Are you uncomfortable with the high humidity?<br>How about taking a shower?"
+        }
+    }
 
 
 
