@@ -209,6 +209,35 @@
         if (emotionVal != undefined) {
             console.log(emotionVal);
             result.innerHTML = emotionVal;
+            if(emotionVal=='Angry')
+            {
+            result.innerHTML = "Angry<p style='text-align: center; font-size:30px; font-style:italic; color:#050505'><br>There can be days like that.<br>Why don't you listen to your favorite music on a day like this?</p>";
+            }           
+           else if(emotionVal == "Neutral")
+            {
+                result.innerHTML = "Neutral <p style='text-align: center; font-size:30px; font-style:italic; color:#050505'><br>You look calm.<br> Sometimes it's okay to be honest about your feelings.<br> Share your feelings through conversations with people close to you.</p> ";
+            }
+            else if(emotionVal == "Surprising")
+            {
+                result.innerHTML = "Surprising<p style='text-align: center; font-size:30px; font-style:italic; color:#050505'><br> Breathe out slowly.<br> It's also good to have meditation. <br>And drinking a cup of warm tea will help calm you down.</p>";
+            }
+            else if(emotionVal == "Disgusting")
+            {
+                result.innerHTML = "Disgusting<p style='text-align: center; font-size:30px; font-style:italic; color:#050505'><br>Did something uncomfortable happen today?<br>When you feel nauseous, it is good to eat foods such as bananas and cabbages that make your stomach feel better.</p>";
+            }
+            else if(emotionVal=='Fearful')
+            {
+                result.innerHTML="Fearful<p style='text-align: center; font-size:30px; font-style:italic; color:#050505'><br>Courage is resistance to fear and overcoming it. <br>How about a little courage?<br> If facing the object of your fear is difficult, why not ask for help?</p>"
+            }
+            else if(emotionVal=='Sad')
+            {
+                result.innerHTML="Sad<p style='text-align: center; font-size:30px; font-style:italic; color:#050505'><br>If you want to cry, cry as much as you want or do some light exercise, and take a shower. <br>Sad feelings will get better.</p>"
+            }
+            else if(emotionVal=='Happy')
+            {
+                result.innerHTML="Happy<p style='text-align: center; font-size:30px; font-style:italic; color:#050505'><br>Did you have a good day? <br>You look so happy.<br>Have a happy night with this feeling. <br>Great job again today.</p>"
+            }
+
         }
     });
 
