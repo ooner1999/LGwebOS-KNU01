@@ -81,10 +81,11 @@
                             Show me the result
                         </button>
                     </div>
-                    <p style="text-align: center; font-size:30px; font-weight: 500; font-style:italic; color:#050505"
-                        id="event1"></p>
-                    <!-- <p style="text-align: center; font-size:30px; font-weight: 500; color:#a3be7e" id="event2"></p>
-                    <p style="text-align: center; color:#979797" id="event3"></p> -->
+                    <hr>
+                    <p style="text-align: center; font-size:30px; font-weight: 500; font-style:italic; color:#a3be7e" id="event1"></p>
+                    <hr>
+                    <p style="text-align: center; font-size:30px; font-weight: 500; font-style:italic; color:#050505" id="event2"></p>
+                    <!-- <p style="text-align: center; color:#979797" id="event3"></p> -->
                     <br>
 
             </form>
@@ -163,30 +164,31 @@
     console.log(humidity);
 
     const pro1 = document.getElementById('event1');
-    //const pro2 = document.getElementById('event2');
+    const pro2 = document.getElementById('event2');
     //const pro3 = document.getElementById('event3');
 
     function environmentData() {
-        if (temperature > 14 && temperature < 18 && humidity == 70
-            || temperature >= 18 && temperature < 21 && humidity == 60
-            || temperature >= 21 && temperature < 24 && humidity == 50
+        pro1.innerHTML = "temperature: " + temperature + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;humidity: " + humidity;
+        if (temperature > 14 && temperature < 18 && humidity>65 && humidity<=75
+            || temperature >= 18 && temperature < 21 && humidity>55 && humidity<=65
+            || temperature >= 21 && temperature < 24 && humidity>45 && humidity<=55
             || temperature >= 24 && humidity == 40) {
-            //적정 - 온도에 맞는 적당한 습도를 유지하고 계시네요. 
-            pro1.innerHTML = "You are maintaining the right humidity for the temperature.<br>"
+            //적정 - 온도에 맞는 적당한 습도를 유지하고 계시네요.
+            pro2.innerHTML = "You are maintaining the right humidity for the temperature.<br>Keep it going for a good mood!"
         }
-        else if (temperature > 14 && temperature < 18 && humidity < 70
-            || temperature >= 18 && temperature < 21 && humidity < 60
-            || temperature >= 21 && temperature < 24 && humidity < 50
+        else if (temperature > 14 && temperature < 18 && humidity<65
+            || temperature >= 18 && temperature < 21 && humidity<55
+            || temperature >= 21 && temperature < 24 && humidity<45
             || temperature >= 24 && humidity < 40) {
-            //습도 낮음 - 습도가 낮아 건조하진 않으신가요? 건강에 안 좋은 영향을 끼칠 수 있으니 
-            pro1.innerHTML = "2"
+            //습도 낮음 - 습도가 낮아 건조하진 않으신가요? 건강에 안 좋은 영향을 끼칠 수 있으니 환기를 자주 시켜주세요.
+            pro2.innerHTML = "Aren't you dry because of the low humidity?<br>It may adversely affect your health, so please ventilate frequently."
         }
-        else if (temperature > 14 && temperature < 18 && humidity > 70
-            || temperature >= 18 && temperature < 21 && humidity > 60
-            || temperature >= 21 && temperature < 24 && humidity > 50
+        else if (temperature > 14 && temperature < 18 && humidity>75
+            || temperature >= 18 && temperature < 21 && humidity>65
+            || temperature >= 21 && temperature < 24 && humidity>55
             || temperature >= 24 && humidity > 40) {
             //습도 높음
-            pro1.innerHTML = "Are you uncomfortable with the high humidity?<br>How about taking a shower?"
+            pro2.innerHTML = "Are you uncomfortable with the high humidity?<br>How about taking a shower?"
         }
     }
 
