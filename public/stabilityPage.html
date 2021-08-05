@@ -82,8 +82,8 @@
                     </div>
                     <p style="text-align: center; font-size:30px; font-weight: 500; font-style:italic; color:#050505"
                         id="event1"></p>
-                    <!-- <p style="text-align: center; font-size:30px; font-weight: 500; color:#a3be7e" id="event2"></p>
-                    <p style="text-align: center; color:#979797" id="event3"></p> -->
+                     <p style="text-align: center; font-size:30px; font-weight: 500; font-style:italic; color:#050505" id="event2"></p>
+                    <!-- <p style="text-align: center; color:#979797" id="event3"></p> -->
                     <br>
 
             </form>
@@ -153,6 +153,8 @@
             if (snapVal.hasOwnProperty(key)) {
                 val2 = snapVal[key].heartRate;
                 val1 = snapVal[key].bodyTemperature;
+        
+
             }
         }
     });
@@ -160,11 +162,15 @@
     //val2 = parseFloat(heartRate);
     //val1 = parseFloat(bodyTemperature);
 
-    const pro1 = document.getElementById('event1');
-    //const pro2 = document.getElementById('event2');
+    const pro2 = document.getElementById('event1');
+    const pro1 = document.getElementById('event2');
     //const pro3 = document.getElementById('event3');
 
+    
+
     function stabilityData() {
+        pro2.innerHTML = "heart rate : " +val2+", body temperature : " +val1;
+
         if (parseFloat(val1) <= 70) {
 
         // A very healthy heart rate.
